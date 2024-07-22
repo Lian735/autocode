@@ -14,6 +14,7 @@
             animation: gradientAnimation 60s ease infinite;
             color: #fff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -30,14 +31,14 @@
         }
 
         .code-container {
-            width: 80%;
-            max-width: 600px;
+            width: 64%;
+            max-width: 480px;
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             overflow: auto;
-            max-height: 80vh;
+            max-height: 64vh;
         }
 
         .code {
@@ -47,24 +48,30 @@
             position: relative;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1rem;
-            background-color: #fff;
-            margin-left: 2px;
-            animation: blink 1s step-start infinite;
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+            display: inline;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            opacity: 0.5;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="code-container" id="code-container">
-        <div class="code" id="code"><span class="cursor" id="cursor"></span></div>
+        <div class="code" id="code"></div>
     </div>
+    <div class="footer">made by Lian</div>
 
     <script>
         const snippets = [
