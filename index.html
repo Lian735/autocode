@@ -9,9 +9,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(270deg, #ff7eb3, #ff758c, #ff7eb3);
-            background-size: 600% 600%;
-            animation: gradientAnimation 16s ease infinite;
+            background: linear-gradient(270deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #ff0000);
+            background-size: 1400% 1400%;
+            animation: gradientAnimation 30s ease infinite;
             color: #fff;
             display: flex;
             justify-content: center;
@@ -21,8 +21,12 @@
 
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            16% { background-position: 16% 50%; }
+            33% { background-position: 33% 50%; }
+            50% { background-position: 50% 50%; }
+            66% { background-position: 66% 50%; }
+            83% { background-position: 83% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .code-container {
@@ -44,17 +48,22 @@
     </style>
 </head>
 <body>
-    <div class="code-container">
+    <div class="code-container" id="code-container">
         <div class="code" id="code"></div>
     </div>
 
     <script>
         const snippets = [
             "function helloWorld() {\n    console.log('Hello, World!');\n}\n\n",
-            "let count = 0;\nwhile (count < 10) {\n    count++;\n}\n\n",
+            "let count = 0;\nwhile (count < 10) {\n    count++;\n    console.log(count);\n}\n\n",
             "const add = (a, b) => a + b;\n\n",
             "class Person {\n    constructor(name) {\n        this.name = name;\n    }\n}\n\n",
-            "if (x > 10) {\n    return x;\n} else {\n    return 10;\n}\n\n"
+            "if (x > 10) {\n    return x;\n} else {\n    return 10;\n}\n\n",
+            "for (let i = 0; i < 5; i++) {\n    console.log(i);\n}\n\n",
+            "const greet = name => `Hello, ${name}!`;\n\n",
+            "const array = [1, 2, 3];\narray.forEach(num => console.log(num));\n\n",
+            "try {\n    throw new Error('Oops!');\n} catch (e) {\n    console.error(e);\n}\n\n",
+            "const square = n => n * n;\nconsole.log(square(5));\n\n"
         ];
 
         let currentSnippet = '';
@@ -66,7 +75,7 @@
             if (charIndex < currentSnippet.length) {
                 codeContainer.textContent += currentSnippet[charIndex];
                 charIndex++;
-                codeContainer.scrollTop = codeContainer.scrollHeight;
+                codeContainer.parentNode.scrollTop = codeContainer.parentNode.scrollHeight;
             } else {
                 currentSnippet = getRandomCodeSnippet();
                 charIndex = 0;
@@ -78,7 +87,7 @@
         }
 
         currentSnippet = getRandomCodeSnippet();
-        setInterval(typeCode, 50);
+        setInterval(typeCode, 20);  // Schnelleres Tippen durch kürzeres Intervall
     </script>
 </body>
 </html>
