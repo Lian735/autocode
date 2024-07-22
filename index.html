@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unendlicher Code Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(270deg, #ff7eb3, #ff758c, #ff7eb3);
+            background-size: 600% 600%;
+            animation: gradientAnimation 16s ease infinite;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .code-container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: auto;
+            max-height: 90vh;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="code-container">
+        <div class="code" id="code"></div>
+    </div>
+
+    <script>
+        const snippets = [
+            "function helloWorld() {\n    console.log('Hello, World!');\n}\n\n",
+            "let count = 0;\nwhile (count < 10) {\n    count++;\n}\n\n",
+            "const add = (a, b) => a + b;\n\n",
+            "class Person {\n    constructor(name) {\n        this.name = name;\n    }\n}\n\n",
+            "if (x > 10) {\n    return x;\n} else {\n    return 10;\n}\n\n"
+        ];
+
+        let currentSnippet = '';
+        let charIndex = 0;
+
+        function typeCode() {
+            const codeContainer = document.getElementById('code');
+
+            if (charIndex < currentSnippet.length) {
+                codeContainer.textContent += currentSnippet[charIndex];
+                charIndex++;
+                codeContainer.scrollTop = codeContainer.scrollHeight;
+            } else {
+                currentSnippet = getRandomCodeSnippet();
+                charIndex = 0;
+            }
+        }
+
+        function getRandomCodeSnippet() {
+            return snippets[Math.floor(Math.random() * snippets.length)];
+        }
+
+        currentSnippet = getRandomCodeSnippet();
+        setInterval(typeCode, 50);
+    </script>
+</body>
+</html>
