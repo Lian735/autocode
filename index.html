@@ -9,9 +9,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(270deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #ff0000);
+            background: linear-gradient(270deg, #ff9999, #ffcc99, #ffff99, #99ff99, #9999ff, #cc99ff, #ff9999);
             background-size: 1400% 1400%;
-            animation: gradientAnimation 30s ease infinite;
+            animation: gradientAnimation 60s ease infinite;
             color: #fff;
             display: flex;
             justify-content: center;
@@ -30,26 +30,40 @@
         }
 
         .code-container {
-            width: 90%;
-            max-width: 800px;
+            width: 80%;
+            max-width: 600px;
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             overflow: auto;
-            max-height: 90vh;
+            max-height: 80vh;
         }
 
         .code {
             font-family: 'Courier New', Courier, monospace;
             font-size: 1rem;
             white-space: pre-wrap;
+            position: relative;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1rem;
+            background-color: #fff;
+            margin-left: 2px;
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
         }
     </style>
 </head>
 <body>
     <div class="code-container" id="code-container">
-        <div class="code" id="code"></div>
+        <div class="code" id="code"><span class="cursor" id="cursor"></span></div>
     </div>
 
     <script>
@@ -71,9 +85,11 @@
 
         function typeCode() {
             const codeContainer = document.getElementById('code');
-
+            const cursor = document.getElementById('cursor');
+            
             if (charIndex < currentSnippet.length) {
-                codeContainer.textContent += currentSnippet[charIndex];
+                const textNode = document.createTextNode(currentSnippet[charIndex]);
+                codeContainer.insertBefore(textNode, cursor);
                 charIndex++;
                 codeContainer.parentNode.scrollTop = codeContainer.parentNode.scrollHeight;
             } else {
@@ -87,7 +103,7 @@
         }
 
         currentSnippet = getRandomCodeSnippet();
-        setInterval(typeCode, 20);  // Schnelleres Tippen durch kürzeres Intervall
+        setInterval(typeCode, 50);  // Schnelleres Tippen durch kürzeres Intervall
     </script>
 </body>
 </html>
